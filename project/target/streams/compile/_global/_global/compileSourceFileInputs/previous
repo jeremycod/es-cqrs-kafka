@@ -1,0 +1,1 @@
+["sbt.Task[scala.collection.immutable.Map[java.lang.String, scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]]",{"2.12.10":{"hashes":[["/home/zoran/git_samples/blackjack_game/project/Common.scala","c5d5ce50521ca04e4b88b8e69638d1d482088ee8"]],"lastModifiedTimes":[]}}]

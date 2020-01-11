@@ -1,0 +1,5 @@
+[warn] insecure HTTP request is deprecated 'http://dl.bintray.com/scalaz/releases'; switch to HTTPS or opt-in as ("Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases").withAllowInsecureProtocol(true)
+[debug] "not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/home/zoran/git_samples/blackjack_game/"), "webapp")...
+[debug] Done updating ProjectRef(uri("file:/home/zoran/git_samples/blackjack_game/"), "webapp")
+[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
