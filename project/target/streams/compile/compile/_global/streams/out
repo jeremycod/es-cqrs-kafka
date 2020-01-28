@@ -1,8 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m/home/zoran/git_samples/game_cards/project/Common.scala:7:3: value scalacOptions is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0mpossible cause: maybe a semicolon is missing before `value scalacOptions'?[0m
-[0m[[0m[31merror[0m] [0m[0m		scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-Xfatal-warnings")[0m
-[0m[[0m[31merror[0m] [0m[0m		^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/zoran/git_samples/game_cards/project/Common.scala:7:17: not found: value ++=[0m
-[0m[[0m[31merror[0m] [0m[0m		scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-Xfatal-warnings")[0m
-[0m[[0m[31merror[0m] [0m[0m		              ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

@@ -87,7 +87,6 @@
     <orderEntry type="library" name="sbt: com.typesafe.play:play-functional_2.12:2.8.1:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.play:play-exceptions:2.8.0:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.play:play-akka-http-server_2.12:2.8.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:filters-helpers_2.12:2.8.0:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.play:build-link:2.8.0:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-stream_2.12:2.6.1:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-slf4j_2.12:2.6.1:jar" level="project" />

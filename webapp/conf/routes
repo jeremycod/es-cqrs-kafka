@@ -5,6 +5,7 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.MainController.index
+GET     /ping                       controllers.MainController.ping
 POST    /game                       controllers.MainController.createGame
 
 # Map static resources from the /public folder to the /assets URL path

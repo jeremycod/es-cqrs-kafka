@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/zoran/git_samples/game_cards/webapp/conf/routes
-// @DATE:Sat Jan 11 11:56:37 PST 2020
+// @SOURCE:/home/zoran/git_samples/blackjack_game/webapp/conf/routes
+// @DATE:Sat Jan 11 18:14:50 PST 2020
 
 package router
 
@@ -15,7 +15,7 @@ class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:7
   MainController_1: controllers.MainController,
-  // @LINE:11
+  // @LINE:12
   Assets_0: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
@@ -24,7 +24,7 @@ class Routes(
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:7
     MainController_1: controllers.MainController,
-    // @LINE:11
+    // @LINE:12
     Assets_0: controllers.Assets
   ) = this(errorHandler, MainController_1, Assets_0, "/")
 
@@ -40,6 +40,7 @@ class Routes(
 
   def documentation = List(
     ("""GET""", this.prefix, """controllers.MainController.index"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """ping""", """controllers.MainController.ping"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """game""", """controllers.MainController.createGame"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     Nil
@@ -68,10 +69,28 @@ class Routes(
   )
 
   // @LINE:8
-  private[this] lazy val controllers_MainController_createGame1_route = Route("POST",
+  private[this] lazy val controllers_MainController_ping1_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("ping")))
+  )
+  private[this] lazy val controllers_MainController_ping1_invoker = createInvoker(
+    MainController_1.ping,
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.MainController",
+      "ping",
+      Nil,
+      "GET",
+      this.prefix + """ping""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:9
+  private[this] lazy val controllers_MainController_createGame2_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("game")))
   )
-  private[this] lazy val controllers_MainController_createGame1_invoker = createInvoker(
+  private[this] lazy val controllers_MainController_createGame2_invoker = createInvoker(
     MainController_1.createGame,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -85,11 +104,11 @@ class Routes(
     )
   )
 
-  // @LINE:11
-  private[this] lazy val controllers_Assets_versioned2_route = Route("GET",
+  // @LINE:12
+  private[this] lazy val controllers_Assets_versioned3_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned2_invoker = createInvoker(
+  private[this] lazy val controllers_Assets_versioned3_invoker = createInvoker(
     Assets_0.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -113,15 +132,21 @@ class Routes(
       }
   
     // @LINE:8
-    case controllers_MainController_createGame1_route(params@_) =>
+    case controllers_MainController_ping1_route(params@_) =>
       call { 
-        controllers_MainController_createGame1_invoker.call(MainController_1.createGame)
+        controllers_MainController_ping1_invoker.call(MainController_1.ping)
       }
   
-    // @LINE:11
-    case controllers_Assets_versioned2_route(params@_) =>
+    // @LINE:9
+    case controllers_MainController_createGame2_route(params@_) =>
+      call { 
+        controllers_MainController_createGame2_invoker.call(MainController_1.createGame)
+      }
+  
+    // @LINE:12
+    case controllers_Assets_versioned3_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned2_invoker.call(Assets_0.versioned(path, file))
+        controllers_Assets_versioned3_invoker.call(Assets_0.versioned(path, file))
       }
   }
 }

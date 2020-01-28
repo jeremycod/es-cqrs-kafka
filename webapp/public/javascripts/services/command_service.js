@@ -6,9 +6,25 @@
     module.service('commandService', function($http) {
         return {
             createGame: function(success, error) {
-                $http.post('/game')
-                    .success(success)
-                    .error(error);
+                var req = {
+                    method: 'POST',
+                    url: '/game',
+                    headers: {
+                        'Content-Type': undefined
+                    },
+                    data: {test: 'test'}
+                }
+                $http(req)
+
+                    .then(
+                        function onSuccess(response){
+                            console.log("Success created");
+                        },
+                        function onError(response){
+                            console.log("Error during game creation");
+                        }
+                    );
+
             },
             startGame: function(gameId, playersCount, error) {
                 $http.post('/game/' + gameId + '/start?playersCount=' + playersCount)

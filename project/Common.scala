@@ -9,4 +9,6 @@ object Common {
 	val akkaVersion = "2.6.1"
 
 	val akkaHttpVersion = "10.1.11"
+
+	val kafkaVersion = "2.4.0"
 }

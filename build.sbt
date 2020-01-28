@@ -18,7 +18,30 @@ lazy val `game` = (project in file("game"))
 			"com.typesafe.akka" %% "akka-actor-typed"         % akkaVersion,
 			"com.typesafe.akka" %% "akka-stream"              % akkaVersion,
 			"ch.qos.logback"    % "logback-classic"           % "1.2.3",
+			"org.apache.kafka" %% "kafka"                     % kafkaVersion,
+			"com.typesafe.akka" %% "akka-http-testkit"        % akkaHttpVersion % Test,
+			"com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
+			"org.scalatest"     %% "scalatest"                % "3.0.8"         % Test
+		),
+		fork := true
+	)
+	.settings(
+		resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases"
+	)
 
+lazy val `statistics` = (project in file("statistics"))
+	.settings(commonSettings: _*)
+	.settings(
+		inThisBuild(List(
+			organization    := "com.blackjack.statistics"
+		)),
+		libraryDependencies ++= Seq(
+			"com.typesafe.akka" %% "akka-http"                % akkaHttpVersion,
+			"com.typesafe.akka" %% "akka-http-spray-json"     % akkaHttpVersion,
+			"com.typesafe.akka" %% "akka-actor-typed"         % akkaVersion,
+			"com.typesafe.akka" %% "akka-stream"              % akkaVersion,
+			"ch.qos.logback"    % "logback-classic"           % "1.2.3",
+			"org.apache.kafka" %% "kafka"                     % kafkaVersion,
 			"com.typesafe.akka" %% "akka-http-testkit"        % akkaHttpVersion % Test,
 			"com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
 			"org.scalatest"     %% "scalatest"                % "3.0.8"         % Test
@@ -45,6 +68,7 @@ lazy val `webapp` = (project in file("webapp")).enablePlugins(PlayScala)
 		resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases"
 	)
 	.enablePlugins(PlayScala)
+	.disablePlugins(PlayFilters)
 
 
 

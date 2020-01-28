@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/zoran/git_samples/game_cards/webapp/conf/routes
-// @DATE:Sat Jan 11 11:56:37 PST 2020
+// @SOURCE:/home/zoran/git_samples/blackjack_game/webapp/conf/routes
+// @DATE:Sat Jan 11 18:14:50 PST 2020
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -18,6 +18,16 @@ package controllers.javascript {
     }
 
   
+    // @LINE:8
+    def ping: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.MainController.ping",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "ping"})
+        }
+      """
+    )
+  
     // @LINE:7
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MainController.index",
@@ -28,7 +38,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:8
+    // @LINE:9
     def createGame: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.MainController.createGame",
       """
@@ -40,7 +50,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:11
+  // @LINE:12
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -48,7 +58,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:11
+    // @LINE:12
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

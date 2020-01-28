@@ -20,11 +20,17 @@ class MainController  @Inject()(
 		Ok(views.html.game("Your Game is ready."))
 	}
 
+	def ping = Action {
+		Ok("Ping");
+	}
+
 	def createGame() = Action.async { request =>
 	Future{
+		println(s"MainController creates game. Url:${Game.apiUrl}")
 		ws.url(s"${Game.apiUrl}/game")
 			.post("")
-		Ok("")
+		println("Done in MainController")
+		Ok("Created Game in Main Controller")
 	}
 
 

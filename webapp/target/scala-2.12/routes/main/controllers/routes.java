@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/zoran/git_samples/game_cards/webapp/conf/routes
-// @DATE:Sat Jan 11 11:56:37 PST 2020
+// @SOURCE:/home/zoran/git_samples/blackjack_game/webapp/conf/routes
+// @DATE:Sat Jan 11 18:14:50 PST 2020
 
 package controllers;
 
