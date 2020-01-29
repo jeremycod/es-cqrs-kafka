@@ -3,3 +3,9 @@
 /project/target
 /project/target/config-classes
 /project/project/target
+/webapp/target
+/webapp/project/target
+/statistics/target
+/statistics/project/target
+/game/target
+/game/project/target
