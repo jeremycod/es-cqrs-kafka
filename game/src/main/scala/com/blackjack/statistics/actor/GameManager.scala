@@ -1,13 +1,20 @@
 package com.blackjack.statistics.actor
 
 import java.util.Properties
+import java.util.UUID
 
 import akka.actor.typed.ActorRef
 import akka.actor.typed.Behavior
 import akka.actor.typed.receptionist.Receptionist
 import akka.actor.typed.receptionist.ServiceKey
+import akka.actor.typed.scaladsl.ActorContext
 import akka.actor.typed.scaladsl.Behaviors
-import com.blackjack.statistics.actor.GameManager.kafkaProperties
+import com.blackjack.common.KafkaTopics
+import com.blackjack.common.helpers.Generators
+import com.blackjack.common.serializers.EventEnvelopeSerializer
+import com.blackjack.protobuf.game_events.EventEnvelope
+import com.blackjack.protobuf.game_events.GameStarted
+import com.blackjack.statistics.actor.KafkaProducerActor.Message
 import com.typesafe.scalalogging.Logger
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
@@ -21,51 +28,51 @@ object GameManager {
 
   sealed trait GameCommand
   final case class CreateGame(replyTo: ActorRef[ActionPerformed]) extends GameCommand
+  final case class FinishGame(replyTo: ActorRef[ActionPerformed]) extends GameCommand
 
   final case class ActionPerformed()
-
-//TODO: Temporary This should go in separate Actor
-  val kafkaProperties = makeKafkaProperties()
-
-
-  val producer = new KafkaProducer[String, String](kafkaProperties)
-
-  val topic = "test"
-
-  val message = "Sample message"
-
-
 
   def apply(): Behavior[GameCommand] = Behaviors.setup {
   context =>
   Behaviors.withStash(1000){
     stash =>
-      context.system.receptionist ! Receptionist.Register(Key, context.self)
-      handleRequest()
+     // context.system.receptionist ! Receptionist.Register(Key, context.self)
+
+        createGame(context)
+
   }
 
 }
 
-  def handleRequest(): Behavior[GameCommand] = Behaviors.receiveMessage {
+  def createGame(context: ActorContext[GameCommand]): Behavior[GameCommand] = Behaviors.receiveMessagePartial[GameCommand] {
     case CreateGame(replyTo) =>
-      println("CREATE GAME")
+      val kafkaProducer = context.spawn(KafkaProducerActor(), "KafkaProducer")
       // TODO: Create some behaviour here
-      val record = new ProducerRecord[String, String](topic, message)
-       producer.send(record)
-      println("Sent message to kafka")
+      val createGameMessage = GameStarted().update(
+        _.gameId := UUID.randomUUID().toString
+      )
+      val eventEnvelope = EventEnvelope().update(
+        _.correlationId := Generators.correlationId,
+        _.gameStarted := createGameMessage
+      )
 
-
-      replyTo ! ActionPerformed()
-    Behaviors.same
+      kafkaProducer ! Message(eventEnvelope)
+      Behaviors.same
   }
 
-  private def makeKafkaProperties(): Properties = {
-    val kafkaProperties= new Properties()
-    kafkaProperties.setProperty("bootstrap.servers", "localhost:9092")
-    kafkaProperties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-    kafkaProperties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-    kafkaProperties
-  }
+  def playGame(): Behavior[GameCommand] =
+    Behaviors.setup { context =>
+      Behaviors.receiveMessage {
+        case CreateGame(replyTo) =>
+          context.log.error("Game is already created")
+          Behaviors.same
+        case FinishGame(replyTo) =>
+        context.log.info("Finish game")
+        apply()
+      }
+
+    }
+
 
   val Key: ServiceKey[GameCommand] = ServiceKey("gameManager")
 }

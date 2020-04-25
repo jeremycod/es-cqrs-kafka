@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_package = "com.blackjack.protobuf";
+
+message EventEnvelope {
+    int32 correlation_id = 1;
+    oneof payload {
+        GameStarted game_started = 11;
+        GameFinished game_finished = 12;
+    }
+}
+
+message GameStarted {
+    string game_id = 1;
+}
+message GameFinished {
+    string game_id = 1;
+}

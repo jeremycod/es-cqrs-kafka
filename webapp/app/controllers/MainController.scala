@@ -16,9 +16,6 @@ class MainController  @Inject()(
                                 ws: WSClient,
                                 ) extends AbstractController(cc) {
 
-	def index = Action {
-		Ok(views.html.game("Your Game is ready."))
-	}
 
 	def ping = Action {
 		Ok("Ping");

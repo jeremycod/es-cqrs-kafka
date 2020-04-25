@@ -7,6 +7,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
 import com.blackjack.statistics.Config.Api.bindHost
 import com.blackjack.statistics.Config.Api.bindPort
+import com.blackjack.statistics.actor.EventListenerActor
 
 import scala.util.Failure
 import scala.util.Success
@@ -32,18 +33,20 @@ object BootStatistics {
   }
   //#start-http-server
   def main(args: Array[String]): Unit = {
+
     //#server-bootstrapping
     val rootBehavior = Behaviors.setup[Nothing] { context =>
-     val eventListenerActor = context.spawn(EventListenerActor(), name "StatsEventListenerActor")
-
+     val eventListenerActor = context.spawn(EventListenerActor(),  "StatsEventListenerActor")
+      context.watch(eventListenerActor)
+      val consumer = new EventsSubscriber(eventListenerActor, context)
       val routes = new StatisticsRoutes()(context.system)
       startHttpServer(routes.gameRoute, context.system)
 
       Behaviors.empty
     }
 
-    val consumer = EventsSubscriber()
     val system = ActorSystem[Nothing](rootBehavior, "StatisticsHttpServer")
+
 
   }
 }
