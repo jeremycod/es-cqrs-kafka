@@ -1,5 +1,5 @@
 {
-  "name": "scala-play-react-seed",
+  "name": "blackjack-game",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -10,11 +10,16 @@
   },
   "private": true,
   "dependencies": {
+    "@redux-saga/core": "^1.1.3",
     "kleur": "^3.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.0.1"
+    "react-scripts": "^3.0.1",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.3"
   },
   "devDependencies": {
     "ncp": "^2.0.0",

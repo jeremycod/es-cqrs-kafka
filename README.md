@@ -12,4 +12,3 @@ This example is based on the book [Designing Event-Driven Systems - Concepts and
 4. Run web application: `sbt "project webapp" run`
 
  
-More details can be found on [ScalaC Team Blog](http://blog.scalac.io/) (soon).

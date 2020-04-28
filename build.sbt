@@ -29,7 +29,7 @@ lazy val `common` = (project in file("common"))
 		fork := true
 	)
 	.settings(PB.targets in Compile := Seq(scalapb.gen() -> (sourceManaged in Compile).value))
-	.enablePlugins(PlayScala)
+	//.enablePlugins(PlayScala)
 
 
 lazy val `game` = (project in file("game"))
@@ -59,7 +59,7 @@ lazy val `game` = (project in file("game"))
 		resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases"
 	)
 	.settings(PB.targets in Compile := Seq(scalapb.gen() -> (sourceManaged in Compile).value))
-	.enablePlugins(PlayScala)
+	//.enablePlugins(PlayScala)
   .dependsOn(common)
 
 lazy val `statistics` = (project in file("statistics"))

@@ -6,11 +6,9 @@ import akka.actor.typed.Behavior
 import akka.actor.typed.scaladsl.Behaviors
 import com.blackjack.common.KafkaKeys
 import com.blackjack.common.KafkaTopics
-import com.blackjack.common.helpers.Generators
 import com.blackjack.common.serializers.EventEnvelopeSerializer
 import com.blackjack.protobuf.game_events.EventEnvelope
 import com.blackjack.statistics.actor.GameManager.ActionPerformed
-import com.blackjack.statistics.actor.GameManager.key
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
 
@@ -29,7 +27,6 @@ object KafkaProducerActor {
 	        KafkaKeys.COMMAND,
           eventEnvelope)
         producer.send(record)
-        replyTo ! ActionPerformed()
         Behaviors.same
     }
   }

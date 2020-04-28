@@ -12,7 +12,7 @@ object EventListenerActor {
 	private def listen(): Behavior[Command] =
 		Behaviors.receiveMessage {
 			case CreateGame() =>
-				println("Received command CreateGame")
+
 			Behaviors.same
 		}
 

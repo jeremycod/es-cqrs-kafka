@@ -46,7 +46,5 @@ object BootStatistics {
     }
 
     val system = ActorSystem[Nothing](rootBehavior, "StatisticsHttpServer")
-
-
   }
 }

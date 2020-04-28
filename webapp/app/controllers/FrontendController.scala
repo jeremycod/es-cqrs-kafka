@@ -28,17 +28,15 @@ class FrontendController @Inject() (
   ): T =
     config.getOptional[T](name).getOrElse(default)
 
-  final val isProduction = false
+  final val isProduction = true
 
 
   def index: Action[AnyContent] =
 
     if (isProduction) {
-      println("INDEX ROUTE CALLED")
+
       assets.at("index.html")
     } else {
-
-      println("INDEX ROUTE CALLED LOCAL")
       Action.async { implicit request =>
         ws.url("http://localhost:3000/").get().map {
           response =>
